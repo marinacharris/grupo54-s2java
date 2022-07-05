@@ -2,9 +2,9 @@ public class Constructor2 {
     String nombre;
     int nota;
 
-    public Constructor2(String nom, int pnota) {
+    public Constructor2(String nom, int nota) {
         nombre = nom;
-        nota = pnota;
+        this.nota = nota;
     }
     public static void main(String[] args) {
         Constructor2 c = new Constructor2("Juan", 4);
