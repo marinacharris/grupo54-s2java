@@ -1,6 +1,11 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+
 
 public class Colecciones {
     public static void main(String[] args) {
@@ -62,6 +67,48 @@ public class Colecciones {
         System.out.println(precios.contains(78));
         Collections.sort(precios);
         System.out.println(precios);
+
+        //hashMap
+        Map<String, String> map1 = new HashMap<String, String>();
+        map1.put("blue","azul");
+        map1.put("green","verde");
+        map1.put("red","rojo");
+        map1.put("yellow","amarillo" );
+        for (String i: map1.keySet()){
+            System.out.println(i + ": " + map1.get(i));
+        }
+        for (String i: map1.values()){
+            System.out.println(i);
+        }
+
+        Map<CarroColecciones, String> map2 = new HashMap<CarroColecciones, String>();
+        map2.put(new CarroColecciones("Mazda"), "Plateado");
+        map2.put(new CarroColecciones("Renault"), "Rojo");
+        map2.put(new CarroColecciones("Nissan"), "Blanco");
+        for (CarroColecciones i: map2.keySet()){
+            System.out.println(i.getMarca() + " " + map2.get(i));
+        }
+
+        // HashSet
+        HashSet<Integer> numeros = new HashSet<Integer>();
+        numeros.add(45);
+        numeros.add(28);
+        numeros.add(39);
+        numeros.add(45);
+        System.out.println(numeros.size());
+        System.out.println(numeros);
+        // obtener un iterador
+        Iterator<Integer> i = numeros.iterator();
+        //System.out.println(i.next());
+        //System.out.println(i.next());
+        while(i.hasNext()){
+            System.out.println(i.next());
+        }
+        
+
+
+
+
 
 
 
