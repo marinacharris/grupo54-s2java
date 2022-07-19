@@ -189,10 +189,90 @@ select * from libros order by 3;
 select * from libros where precio>=0 and precio <=30;
 select * from libros where precio BETWEEN 0 and 30;
 
+-- IN
+SELECT * from libros where autor = 'Borges' or autor = 'Mario Molina';
+select * from libros where autor in ('Borges', 'Mario Molina');
+select * from libros where autor not in ('Borges', 'Mario Molina');
 
+-- is null, is not null
+select * from libros;
+select * from libros where precio is null;
+select * from libros where precio is not null;
 
+-- like y not like, operador exculsivo para las cadenas
+select * from medicamentos;
+insert into medicamentos values (12, 'Acetaminofen + codeína', 'Roche',4800,25);
+select * from medicamentos where nombre like '%Acetami%';
+SELECT * from medicamentos where nombre not like 'B%';
 
+-- funciones de agregado count, sum, min, max avg
 
+select * from libros;
+select count(*) Registros from libros;
+select count(precio) from libros; --count no cuenta los campos can valor null
+select sum(cantidad) from libros;
+select sum(cantidad) from libros where editorial = 'Paidos';
 
+--group by
+select count(*) from libros where editorial = 'Paidos';
+select editorial, count(*) from libros group by editorial; 
+select * from medicamentos;
+select precio, count(*) from MEDICAMENTOS group by precio;
+
+SELECT editorial, max(precio) MAYOR, min(precio) MENOR 
+from libros 
+group by editorial 
+order by editorial desc;
+
+--having
+select editorial, count(*) from libros group by editorial;
+select editorial, count(*) from libros group by editorial having count(*)>3;
+select editorial, avg(precio) from libros group by editorial having avg(precio)>25;
+select editorial, count(*) from libros group by editorial having editorial<> 'Emece';
+select editorial, count(*) from libros where editorial<>'Emece' group by editorial;
+
+--join
+
+drop table libros;
+create table libros(
+	codigo integer primary key,
+	titulo text,
+	autor text, 
+	precio real,
+	codigoeditorial integer,
+	foreign key (codigoeditorial) references editoriales(codigo)
+);
+create table editoriales(
+	codigo integer primary key,
+	nombre text
+);
+insert into editoriales(nombre) values('Planeta');
+ insert into editoriales(nombre) values('Emece');
+ insert into editoriales(nombre) values('Siglo XXI');
+
+insert into libros (titulo, autor, codigoeditorial, precio)
+  values('El aleph', 'Borges', 2, 34);
+ insert into libros (titulo, autor, codigoeditorial, precio)
+  values('Antología poética', 'Borges', 1, 39.50);
+ insert into libros (titulo, autor, codigoeditorial, precio)
+  values('Java en 10 minutos', 'Mario Molina', 1, 50.50);
+ insert into libros (titulo, autor, codigoeditorial, precio)
+  values('Alicia en el pais de las maravillas', 'Lewis Carroll', 2, 19.90);
+ insert into libros (titulo, autor, codigoeditorial, precio)
+  values('Martin Fierro', 'Jose Hernandez', 2, 25.90);
+ insert into libros (titulo, autor, codigoeditorial, precio)
+  values('Martin Fierro', 'Jose Hernandez', 3, 16.80);
+ 
+select *
+from libros 
+join editoriales on(libros.codigoeditorial = editoriales.codigo);
+
+select libros.codigo, titulo, autor, nombre 
+from libros
+join editoriales on(libros.codigoeditorial = editoriales.codigo);
+
+SELECT l.codigo, titulo, autor, nombre
+from libros l
+join editoriales e on (l.codigoeditorial = e.codigo);
 
 
